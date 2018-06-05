@@ -1,4 +1,4 @@
-package com.gigigo.webview
+package com.gigigo.webview.webviewnavigator
 
 import android.annotation.TargetApi
 import android.content.Intent
@@ -14,8 +14,8 @@ import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import kotlinx.android.synthetic.main.activity_main.*
-
+import com.gigigo.webview.webviewnavigator.R.layout.activity_webview
+import kotlinx.android.synthetic.main.activity_webview.*
 
 class WebViewActivity : AppCompatActivity() {
 
@@ -33,7 +33,7 @@ class WebViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(activity_webview)
 
         toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
@@ -62,7 +62,7 @@ class WebViewActivity : AppCompatActivity() {
             super.onBackPressed()
     }
 
-    fun getDefaultChromeWebClient() : WebChromeClient{
+    fun getDefaultChromeWebClient() : WebChromeClient {
         return object : WebChromeClient(){
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
@@ -71,7 +71,7 @@ class WebViewActivity : AppCompatActivity() {
         }
     }
 
-    fun getDefaultWebClient() : WebViewClient{
+    fun getDefaultWebClient() : WebViewClient {
         return object : WebViewClient(){
 
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
@@ -119,7 +119,7 @@ class WebViewActivity : AppCompatActivity() {
                 shareIntent.action = Intent.ACTION_SEND
                 shareIntent.type="text/plain"
                 shareIntent.putExtra(Intent.EXTRA_TEXT, webview_client.url)
-                startActivity(Intent.createChooser(shareIntent,getString(R.string.action_share)))
+                startActivity(Intent.createChooser(shareIntent, getString(R.string.action_share)))
                 true
             }
             R.id.action_refresh -> {
